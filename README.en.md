@@ -122,9 +122,9 @@ With an N3 attached (`2CA3:0020`):
 | FTP 21 | `220 Hello!`, anonymous and common credentials → `530` |
 | USB mass storage | SD card only |
 | adb (5555) / SSH / HTTP | closed; no adb interface on USB |
-| **DUML (vendor bulk)** | **works**, but read-only |
+| **DUML (vendor bulk)** | **one-way broadcast only** — writes produce no reply; interfaces 3/5/6/7 reject writes |
 
-DUML `GENERAL / cmd 0x01` reply:
+DUML broadcast on interface 4 (EP `0x04`/`0x85`, cmd `0x82`, ~0.3 s interval):
 
 ```text
 55 2b 04 58 3c 0a 00 00 80 00 01 00 12

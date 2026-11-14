@@ -126,9 +126,9 @@ ret
 | FTP 21 | `220 Hello!`，匿名与常见口令全部 `530` |
 | USB 大容量存储 | 只映射 SD 卡（`Linux File-Stor Gadget`） |
 | adb (5555) / SSH / HTTP | 全关，USB 侧也没有 adb 接口 |
-| **DUML（厂商 bulk 通道）** | **可用**，但只回身份与状态 |
+| **DUML（厂商 bulk 通道）** | **只有单向广播**：写入不产生应答，接口 3/5/6/7 干脆拒写 |
 
-DUML 握手回包（`GENERAL / cmd 0x01`，interface 4，EP `0x04`/`0x85`）：
+DUML 广播包（interface 4，EP `0x04`/`0x85`，约每 0.3 s 一条，cmd `0x82`）：
 
 ```text
 55 2b 04 58 3c 0a 00 00 80 00 01 00 12
