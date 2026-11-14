@@ -1,0 +1,14 @@
+# 不提交任何厂商固件 / 提取产物（版权与体积原因）
+*.bin
+*.img
+*.br
+*.zip
+*.sig
+*.so
+*.exe
+*.dll
+*.tar
+fw/
+out/
+__pycache__/
+*.pyc
