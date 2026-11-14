@@ -69,21 +69,30 @@ class Ext4:
                     out += self._read(p * self.block_size, self.block_size)
             return bytes(out[:size])
 
-        def walk(buf, d):
+        # 按逻辑块号落位，文件里的空洞补零（稀疏文件必须这样处理，
+        # 否则第二个 extent 会被拼到第一个后面，文件被截短）
+        chunks = []
+
+        def walk(buf, d, base):
             _, cnt, _, dd = struct.unpack("<HHHH", buf[0:8])
             for i in range(cnt):
                 off = 12 + i * 12
-                _, ee_len, hi, lo = struct.unpack("<IHHI", buf[off:off + 12])
+                ee_block, ee_len, hi, lo = struct.unpack("<IHHI", buf[off:off + 12])
                 start = (hi << 32) | lo
                 if ee_len > 32768:
                     ee_len -= 32768
                 if dd == 0:
-                    out.extend(self._read(start * self.block_size, ee_len * self.block_size))
+                    chunks.append((base + ee_block,
+                                   self._read(start * self.block_size, ee_len * self.block_size)))
                 else:
-                    walk(self._read(start * self.block_size, self.block_size), dd - 1)
+                    walk(self._read(start * self.block_size, self.block_size), dd - 1, base + ee_block)
 
-        walk(blk, depth)
-        return bytes(out[:size])
+        walk(blk, depth, 0)
+        out = bytearray(size)
+        for logical, data in chunks:
+            off = logical * self.block_size
+            out[off:off + len(data)] = data
+        return bytes(out)
 
     def listdir(self, ino):
         raw = self.inode(ino)

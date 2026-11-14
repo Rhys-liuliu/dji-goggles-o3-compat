@@ -1,5 +1,7 @@
 # dji-goggles-o3-compat
 
+**中文** | [English](README.en.md)
+
 **大疆 Goggles 3 为什么能收 O3 Air Unit、Goggles N3 为什么不能——以及"让 N3 也支持 O3"到底可不可行。**
 
 一份基于**原厂固件 + 真机探测**的实测记录。所有结论都有可复现的步骤和原始字节。
@@ -16,6 +18,8 @@
 | G3 凭什么能收 O3 | 2024-07-24 的一次固件更新在 G3 的 Android 用户态里加进了 O3 链路支持（官方清单原文：`Added support to use with DJI O3 Air Unit`） |
 | N3 为什么不能 | 硬件不是瓶颈（同代 S2/E3T 平台、2T4R 双频、O3 ⊂ O4）；DJI 从 2024-11 到 2026-10 的 **10 个固件版本一次都没做 O3**，期间还专门做了 O4 Air Unit 支持 |
 | 能改吗 | **公开手段下不能**。三重门：固件加密（`UFIE` + 加扰）、签名与反回滚、无 root/adb/可写调试通道 |
+
+![G3 vs N3 对比](docs/assets/compat.svg)
 
 ---
 
@@ -91,6 +95,26 @@ OTA metadata             e3t/e3t_zv902:9/PD1A.180720.031/13497:userdebug/test-ke
 判定逻辑埋在链路栈二进制里，按**数字 device_type** 走。
 
 详见 [docs/filesystem.md](docs/filesystem.md)。
+
+### 4. 链路库静态分析：没有白名单，只有数字 id
+
+`libwlm.so`（AArch64，未 strip 动态符号）解析出 477 个函数。关键的一条：
+
+```asm
+; wlm_get_product_model_num
+adrp  x8, #0x6f000
+ldr   x8, [x8, #0xb28]     ; 重定位后的表指针
+and   w9, w0, #0xff
+ldrb  w0, [x8, w9, uxtw]   ; return table[idx] —— 单字节
+ret
+```
+
+机型身份 = **字节表 + 下标**，不是字符串比较。链路库负责：
+字符串→模块 id（`switch_str_to_module_id`）、开链路（`libwlm_link_channel_active`）、
+维护对端设备表（`wlm_share_info_read_dev_info`）。它**执行**链路策略，
+不判断"这副眼镜允许连谁"。全库 1,804 条可打印字符串里 `o3/o4/wm1695/ocusync` 均为 0。
+
+详见 [docs/link-stack.md](docs/link-stack.md)。
 
 ### 4. N3 真机探测：只给"读版本"
 
@@ -182,10 +206,12 @@ python tools/duml_probe.py --dll C:\path\to\libusb0.dll --iface 4
 ```text
 docs/firmware-format.md   固件容器的分层结构与两机差异（含 hexdump）
 docs/filesystem.md        ext4 重建的坑、文件清单、wlm_cfg 摘录
+docs/link-stack.md        libwlm.so 静态分析：符号、反汇编、它管什么不管什么
 docs/device-probe.md      USB/RNDIS/FTP/DUML 探测全过程
+docs/assets/compat.svg    一页纸对比图
 tools/imah_tar.py         tar 成员 + IMaH 头解析
 tools/sdat2img_v4.py      Android block-OTA transfer list v4 -> ext4
-tools/ext4_read.py        最小 ext4 读取器（ls / cat / find）
+tools/ext4_read.py        最小 ext4 读取器（ls / cat / find，支持稀疏文件）
 tools/duml_probe.py       DUML 握手与命令探测
 ```
 

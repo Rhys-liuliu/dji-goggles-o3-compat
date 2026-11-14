@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="560" viewBox="0 0 920 560" role="img" aria-label="Goggles 3 vs Goggles N3 图传兼容性对比">
+  <rect width="920" height="560" fill="#ffffff"/>
+  <text x="32" y="44" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="#1f2328">Goggles 3 能收 O3，Goggles N3 不能：差在哪</text>
+  <text x="32" y="70" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13" fill="#59636e">同代 SDR 平台（S2 + E3T / E3TPB）· 同为 2T4R 双频 · O3 ⊂ O4 —— 所以差别不在射频</text>
+
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="32" y="92" width="856" height="34" fill="#f6f8fa" stroke="#d0d7de"/>
+    <text x="60" y="114" font-size="13" font-weight="600" fill="#1f2328">对比项</text>
+    <text x="430" y="114" font-size="13" font-weight="600" fill="#1a7f37">Goggles 3（zv902 / ZV90）</text>
+    <text x="700" y="114" font-size="13" font-weight="600" fill="#cf222e">Goggles N3（zv300 / ZV30）</text>
+
+    <rect x="32" y="126" width="856" height="44" fill="#ffffff" stroke="#d0d7de"/>
+    <text x="60" y="153" font-size="13" fill="#1f2328">主固件 2805 加密</text>
+    <text x="430" y="147" font-size="13" fill="#1a7f37">✗ 未加密（enc_key 空、只签名）</text>
+    <text x="430" y="163" font-size="11" fill="#59636e">→ payload 可直接解包分析</text>
+    <text x="700" y="147" font-size="13" fill="#cf222e">✓ UFIE + 加扰（熵 8.00）</text>
+    <text x="700" y="163" font-size="11" fill="#59636e">→ 公开密钥库解不开</text>
+
+    <rect x="32" y="170" width="856" height="44" fill="#f6f8fa" stroke="#d0d7de"/>
+    <text x="60" y="197" font-size="13" fill="#1f2328">文件系统可读性</text>
+    <text x="430" y="191" font-size="13" fill="#1a7f37">✓ ext4 已重建，1,806 个条目</text>
+    <text x="430" y="207" font-size="11" fill="#59636e">system / vendor 全可浏览</text>
+    <text x="700" y="191" font-size="13" fill="#cf222e">✗ 无法解包</text>
+    <text x="700" y="207" font-size="11" fill="#59636e">同一模块被加密包住</text>
+
+    <rect x="32" y="214" width="856" height="44" fill="#ffffff" stroke="#d0d7de"/>
+    <text x="60" y="241" font-size="13" fill="#1f2328">O3 支持从哪来</text>
+    <text x="430" y="235" font-size="13" fill="#1a7f37">✓ 01.00.0200（2024-07-24）加入</text>
+    <text x="430" y="251" font-size="11" fill="#59636e">官方变更记录原文可查</text>
+    <text x="700" y="235" font-size="13" fill="#cf222e">✗ 十版固件零 O3</text>
+    <text x="700" y="251" font-size="11" fill="#59636e">同期却做了 O4 Air Unit 支持</text>
+
+    <rect x="32" y="258" width="856" height="44" fill="#f6f8fa" stroke="#d0d7de"/>
+    <text x="60" y="285" font-size="13" fill="#1f2328">调试通道</text>
+    <text x="430" y="279" font-size="13" fill="#1a7f37">Android 9 userdebug / test-keys</text>
+    <text x="430" y="295" font-size="11" fill="#59636e">历史同类最容易 root</text>
+    <text x="700" y="279" font-size="13" fill="#cf222e">无 adb / 无 shell / 无 FTP 凭据</text>
+    <text x="700" y="295" font-size="11" fill="#59636e">DUML 只回版本（zv300 gl Ver.02）</text>
+
+    <rect x="32" y="302" width="856" height="44" fill="#ffffff" stroke="#d0d7de"/>
+    <text x="60" y="329" font-size="13" fill="#1f2328">兼容判定位置</text>
+    <text x="430" y="323" font-size="13" fill="#1f2328">链路栈二进制（按数字 device_type）</text>
+    <text x="430" y="339" font-size="11" fill="#59636e">libwlm.so：按 id 查表，无白名单</text>
+    <text x="700" y="323" font-size="13" fill="#1f2328">同结构，但不可读</text>
+    <text x="700" y="339" font-size="11" fill="#59636e">无法对比、无法移植</text>
+  </g>
+
+  <rect x="32" y="366" width="856" height="164" rx="8" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="56" y="394" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#1f2328">要让 N3 收 O3，需要同时过三道门</text>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13">
+    <circle cx="66" cy="418" r="9" fill="#cf222e"/>
+    <text x="62" y="423" font-size="12" font-weight="700" fill="#ffffff">1</text>
+    <text x="88" y="423" fill="#1f2328">拿到 G3 的 O3 实现 —— 可读，但判定在二进制里，需要反编译</text>
+
+    <circle cx="66" cy="452" r="9" fill="#cf222e"/>
+    <text x="62" y="457" font-size="12" font-weight="700" fill="#ffffff">2</text>
+    <text x="88" y="457" fill="#1f2328">写进 N3 固件 —— UFIE 加密 + 加扰，2026 的包公开密钥解不开</text>
+
+    <circle cx="66" cy="486" r="9" fill="#cf222e"/>
+    <text x="62" y="491" font-size="12" font-weight="700" fill="#ffffff">3</text>
+    <text x="88" y="491" fill="#1f2328">刷进设备 —— 签名 + 反回滚，且无 root / 无 adb / 无可写通道</text>
+
+    <text x="88" y="518" font-size="12" fill="#59636e">三项全缺 → 公开手段不可行。现实解：买 Goggles 3，或把机上 O3 Air Unit 换成 O4 Air Unit。</text>
+  </g>
+</svg>
