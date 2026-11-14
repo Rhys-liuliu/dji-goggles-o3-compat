@@ -209,6 +209,8 @@ docs/filesystem.md        ext4 重建的坑、文件清单、wlm_cfg 摘录
 docs/link-stack.md        libwlm.so 静态分析：符号、反汇编、它管什么不管什么
 docs/device-probe.md      USB/RNDIS/FTP/DUML 探测全过程
 docs/assets/compat.svg    一页纸对比图
+docs/announcement.md      发布用文案（英文 Reddit/rcgroups + 中文版，可直接粘贴）
+evidence/                 原始证据：版本历史 JSON、头 hexdump、符号表、DUML 会话、wlm_cfg 原文
 tools/imah_tar.py         tar 成员 + IMaH 头解析
 tools/sdat2img_v4.py      Android block-OTA transfer list v4 -> ext4
 tools/ext4_read.py        最小 ext4 读取器（ls / cat / find，支持稀疏文件）

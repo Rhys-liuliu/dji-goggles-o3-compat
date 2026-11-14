@@ -184,6 +184,8 @@ docs/filesystem.md        transfer-list pitfalls, file inventory, wlm_cfg excerp
 docs/link-stack.md        libwlm.so: symbols, disassembly, what it does and does not gate
 docs/device-probe.md      USB / RNDIS / FTP / DUML session logs
 docs/assets/compat.svg    one-page comparison diagram
+docs/announcement.md      ready-to-paste posts (EN for Reddit/rcgroups, plus a Chinese version)
+evidence/                 raw evidence: release-note JSON, header hexdumps, symbol table, DUML log
 tools/imah_tar.py         tar members + IMaH header parser
 tools/sdat2img_v4.py      Android block-OTA transfer list v4 → ext4
 tools/ext4_read.py        minimal ext4 reader (ls / cat / find, sparse-safe)
