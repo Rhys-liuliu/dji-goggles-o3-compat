@@ -74,6 +74,8 @@ class Ext4:
         chunks = []
 
         def walk(buf, d, base):
+            if len(buf) < 8:          # 索引块越界/文件被截断，停止而不是崩
+                return
             _, cnt, _, dd = struct.unpack("<HHHH", buf[0:8])
             for i in range(cnt):
                 off = 12 + i * 12

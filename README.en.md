@@ -184,6 +184,7 @@ docs/filesystem.md        transfer-list pitfalls, file inventory, wlm_cfg excerp
 docs/link-stack.md        libwlm.so: symbols, disassembly, what it does and does not gate
 docs/n3-followup.md       digging further into N3: plaintext GFSK firmware, all six UFIE keys fail
 docs/debug-surface.md     debug surface: ro.debuggable=1, root services, TBIE-encrypted boot chain, SD switches
+docs/g3-firmware-delta.md file-level delta 0100 -> 0200: what the O3 update actually changed
 docs/device-probe.md      USB / RNDIS / FTP / DUML session logs
 docs/assets/compat.svg    one-page comparison diagram
 docs/announcement.md      ready-to-paste posts (EN for Reddit/rcgroups, plus a Chinese version)
@@ -191,6 +192,7 @@ evidence/                 raw evidence: release-note JSON, header hexdumps, symb
 tools/imah_tar.py         tar members + IMaH header parser
 tools/sdat2img_v4.py      Android block-OTA transfer list v4 → ext4
 tools/ext4_read.py        minimal ext4 reader (ls / cat / find, sparse-safe)
+tools/ext4_diff.py        file-level and string-level diff between two ext4 images
 tools/duml_probe.py       DUML handshake and command sweep
 ```
 
