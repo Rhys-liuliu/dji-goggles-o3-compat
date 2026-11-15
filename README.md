@@ -208,6 +208,7 @@ docs/firmware-format.md   固件容器的分层结构与两机差异（含 hexdu
 docs/filesystem.md        ext4 重建的坑、文件清单、wlm_cfg 摘录
 docs/link-stack.md        libwlm.so 静态分析：符号、反汇编、它管什么不管什么
 docs/n3-followup.md       N3 侧继续深挖：GFSK 明文固件分析、6 把 UFIE 密钥全试失败
+docs/debug-surface.md      调试面盘点：ro.debuggable=1、服务 root、启动链 TBIE 加密、SD 卡工程开关
 docs/device-probe.md      USB/RNDIS/FTP/DUML 探测全过程
 docs/assets/compat.svg    一页纸对比图
 docs/announcement.md      发布用文案（英文 Reddit/rcgroups + 中文版，可直接粘贴）

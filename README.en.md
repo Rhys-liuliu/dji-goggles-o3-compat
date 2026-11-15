@@ -183,6 +183,7 @@ docs/firmware-format.md   container layers and the G3/N3 difference (with hexdum
 docs/filesystem.md        transfer-list pitfalls, file inventory, wlm_cfg excerpt
 docs/link-stack.md        libwlm.so: symbols, disassembly, what it does and does not gate
 docs/n3-followup.md       digging further into N3: plaintext GFSK firmware, all six UFIE keys fail
+docs/debug-surface.md     debug surface: ro.debuggable=1, root services, TBIE-encrypted boot chain, SD switches
 docs/device-probe.md      USB / RNDIS / FTP / DUML session logs
 docs/assets/compat.svg    one-page comparison diagram
 docs/announcement.md      ready-to-paste posts (EN for Reddit/rcgroups, plus a Chinese version)
