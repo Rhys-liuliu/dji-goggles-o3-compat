@@ -182,6 +182,7 @@ python tools/duml_probe.py --dll C:\path\to\libusb0.dll --iface 4
 docs/firmware-format.md   container layers and the G3/N3 difference (with hexdumps)
 docs/filesystem.md        transfer-list pitfalls, file inventory, wlm_cfg excerpt
 docs/link-stack.md        libwlm.so: symbols, disassembly, what it does and does not gate
+docs/link-tables.md       the recovered static tables: channels / link types / modes / roles - no aircraft names
 docs/n3-followup.md       digging further into N3: plaintext GFSK firmware, all six UFIE keys fail
 docs/debug-surface.md     debug surface: ro.debuggable=1, root services, TBIE-encrypted boot chain, SD switches
 docs/g3-firmware-delta.md file-level delta 0100 -> 0200: what the O3 update actually changed

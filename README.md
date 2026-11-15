@@ -207,6 +207,7 @@ python tools/duml_probe.py --dll C:\path\to\libusb0.dll --iface 4
 docs/firmware-format.md   固件容器的分层结构与两机差异（含 hexdump）
 docs/filesystem.md        ext4 重建的坑、文件清单、wlm_cfg 摘录
 docs/link-stack.md        libwlm.so 静态分析：符号、反汇编、它管什么不管什么
+docs/link-tables.md       读出来的静态表：通道/链路类型/选路模式/角色 —— 没有任何机型名
 docs/n3-followup.md       N3 侧继续深挖：GFSK 明文固件分析、6 把 UFIE 密钥全试失败
 docs/debug-surface.md      调试面盘点：ro.debuggable=1、服务 root、启动链 TBIE 加密、SD 卡工程开关
 docs/g3-firmware-delta.md  G3 0100 → 0200 逐文件差分：O3 支持到底改了什么
